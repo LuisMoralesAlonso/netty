@@ -1079,7 +1079,7 @@ public abstract class HttpHeaders implements Iterable<Map.Entry<String, String>>
      *
      * @param headerValue The value being validated
      */
-    static void validateHeaderValue(String headerValue) {
+    static void validateHeaderValue(CharSequence headerValue) {
         //Check to see if the value is null
         if (headerValue == null) {
             throw new NullPointerException("Header values cannot be null");

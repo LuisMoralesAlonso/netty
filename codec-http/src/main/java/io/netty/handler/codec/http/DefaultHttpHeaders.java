@@ -81,13 +81,13 @@ public class DefaultHttpHeaders extends HttpHeaders implements Encodable {
 
     @Override
     public HttpHeaders add(final CharSequence name, final Object value) {
-        String strVal;
+        CharSequence strVal;
         if (validate) {
             validateHeaderName0(name);
-            strVal = toString(value);
+            strVal = toCharsequence(value);
             validateHeaderValue(strVal);
         } else {
-            strVal = toString(value);
+            strVal = toCharsequence(value);
         }
         int h = hash(name);
         int i = index(h);
@@ -103,7 +103,7 @@ public class DefaultHttpHeaders extends HttpHeaders implements Encodable {
         int h = hash(name);
         int i = index(h);
         for (Object v: values) {
-            String vstr = toString(v);
+            CharSequence vstr = toCharsequence(v);
             if (validate) {
                 validateHeaderValue(vstr);
             }
@@ -172,13 +172,13 @@ public class DefaultHttpHeaders extends HttpHeaders implements Encodable {
 
     @Override
     public HttpHeaders set(final CharSequence name, final Object value) {
-        String strVal;
+        CharSequence strVal;
         if (validate) {
             validateHeaderName0(name);
-            strVal = toString(value);
+            strVal = toCharsequence(value);
             validateHeaderValue(strVal);
         } else {
-            strVal = toString(value);
+            strVal = toCharsequence(value);
         }
         int h = hash(name);
         int i = index(h);
@@ -204,7 +204,7 @@ public class DefaultHttpHeaders extends HttpHeaders implements Encodable {
             if (v == null) {
                 break;
             }
-            String strVal = toString(v);
+            CharSequence strVal = toCharsequence(v);
             if (validate) {
                 validateHeaderValue(strVal);
             }
@@ -341,12 +341,12 @@ public class DefaultHttpHeaders extends HttpHeaders implements Encodable {
         }
     }
 
-    private static String toString(Object value) {
+    private static CharSequence toCharsequence(Object value) {
         if (value == null) {
             return null;
         }
-        if (value instanceof String) {
-            return (String) value;
+        if (value instanceof CharSequence) {
+            return (CharSequence) value;
         }
         if (value instanceof Number) {
             return value.toString();
